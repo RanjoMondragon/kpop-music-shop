@@ -33,7 +33,8 @@ app.use(express.static(path.join(__dirname, '/shop-frontend/build')));
 app.get('*', (req, res) =>
   res.sendFile(path.join(__dirname, 'shop-frontend/build/index.html')));
 
-app.listen(process.env.PORT || 5000, () => {
-  console.log("running")
+const port = process.env.PORT || 5000;
+app.listen(port , () => {
+  console.log(`Serve at http://localhost:${port}`);
 });
 
