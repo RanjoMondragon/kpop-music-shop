@@ -10,6 +10,7 @@ const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
 const stripeRoute = require("./routes/stripe");
 const cors = require("cors");
+const path = require("path");
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -27,7 +28,7 @@ app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", stripeRoute);
 
-const __dirname = path.resolve();
+__dirname = path.resolve();
 app.use(express.static(path.join(__dirname, '/shop-frontend/build')));
 app.get('*', (req, res) =>
   res.sendFile(path.join(__dirname, 'shop-frontend/build/index.html')));
