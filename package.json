@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.2",
+    "react-redux": "^8.0.5"
+  },
+  "name": "shop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "build": "cd api && npm install && cd ../shop-frontend && npm install && npm run build",
+    "start": "node api/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RanjoMondragon/kpop-music-shop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RanjoMondragon/kpop-music-shop/issues"
+  },
+  "homepage": "https://github.com/RanjoMondragon/kpop-music-shop#readme",
+  "description": ""
+}
