@@ -11,6 +11,7 @@ import { publicRequest } from "../requestMethods"
 import { mobile } from "../responsive"
 
 const Container = styled.div`
+    padding-top: 60px;
     ${mobile({ paddingTop: "50px"})}
 `;
 
