@@ -6,13 +6,25 @@ import Product from "./Product"
 
 const Container = styled.div`
     display: flex;
-    padding: 20px;
+    padding: 0px 20px 20px 20px;
     flex-wrap: wrap;
     justify-content: space-between;
     ${mobile({ 
       padding: "0px 10px 10px 10px",
     })}
 `
+
+const Title = styled.h1`
+    font-weight: 700;
+    flex-grow: 1;
+    flex-basis: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+    ${mobile({ 
+      padding: "10px 0px",
+    })}
+`;
+
 
 const Products = ({category, sort}) => {
   const [products, setProducts] = useState([]);
@@ -47,6 +59,7 @@ const Products = ({category, sort}) => {
 
   return (
     <Container>
+      <Title>Featured Products</Title>
       {category ? filteredProducts.map((item) => (
         <Product item={item} key={item._id} />
       )) : products.slice(0, 8).map((item) => (

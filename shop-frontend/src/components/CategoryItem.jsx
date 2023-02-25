@@ -27,6 +27,10 @@ const Image = styled.img`
 `;
 const Title = styled.h1`
     color: white;
+    font-weight: 700;
+    font-size: 40px;
+    padding: 10px;
+    text-align: center;
     margin-bottom: 20px;
     z-index: 2;
 `;
@@ -41,15 +45,6 @@ const Info = styled.div`
     align-items: center;
     justify-content: center;
 `;
-const Button = styled.button`
-    border: none;
-    padding: 10px;
-    background-color: white;
-    color: gray;
-    cursor: pointer;
-    font-weight: 600;
-    z-index: 2;
-`;
 
 function CategoryItem({item}) {
   return (
@@ -60,7 +55,6 @@ function CategoryItem({item}) {
         <Overlay/>
         <Info>
             <Title>{item.category}</Title>
-            <Button>SHOP NOW</Button>
         </Info>
         </Link>
     </Container>

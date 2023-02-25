@@ -6,7 +6,7 @@ import { mobile } from "../responsive"
 const Container = styled.div`
     width: 100dvw;
     height: 100dvh;
-    background: gray;
+    background: var(--off-white);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,7 +28,6 @@ const Title = styled.h1`
 
 const Form = styled.form`
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -36,12 +35,9 @@ const Form = styled.form`
 
 const Input = styled.input`
     flex: 1;
-    width: 100%;
-    min-width: 50%;
-    max-width: 416px;
+    width: 80%;
     margin: 10px;
     padding: 10px;
-    ${mobile({ width: "80%" })}
 `
 
 const Button = styled.button`
@@ -72,8 +68,6 @@ const Register = () => {
         <Wrapper>
             <Title>CREATE AN ACCOUNT</Title>
             <Form>
-                <Input placeholder="first name"/>
-                <Input placeholder="last name"/>
                 <Input placeholder="email"/>
                 <Input placeholder="username"/>
                 <Input placeholder="password"/>

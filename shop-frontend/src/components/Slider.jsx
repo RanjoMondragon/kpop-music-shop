@@ -32,7 +32,6 @@ const Container = styled.div`
     width: 100%;
     height: calc(100vh - 60px);
     display: flex;
-    background-color: var(--secondary-color);
     position: relative;
     overflow: hidden;
     padding-top: 60px;
@@ -51,15 +50,15 @@ const Wrapper = styled.div`
 `;
 
 const Slide = styled.div`
-    width: 100vw;
-    height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
     display: flex;
     align-items: center;
-    background-color: #${props=>props.bg};
+    background-color: var(--secondary-color);
 `;
 
 const ImgContainer = styled.div`
-    height: 100%;
+    height: 90%;
     flex: 1;
 `;
 const Image = styled.img`
@@ -72,6 +71,12 @@ const InfoContainer = styled.div`
     flex: 1;
     padding: 50px;
 `;
+
+const Feature = styled.h1`
+    font-size: 40px;
+    padding-bottom: 50px;
+`;
+
 const Title = styled.h1`
     font-size: 70px;
 `;
@@ -110,6 +115,7 @@ const Slider = () => {
                 <Image src={item.img} />
             </ImgContainer>
             <InfoContainer>
+                <Feature>Featured Artist: </Feature>
                 <Title>{item.title}</Title>
                 <Desc>{item.desc}</Desc>
                 <Button>SHOP NOW!</Button>
