@@ -3,7 +3,7 @@ export const sliderItems = [
         id: 1,
         img: "https://elle.com.sg/wp-content/uploads/2022/08/CHARLES-KEITH-fall-2022-campaign-brand-ambassador-itzy-portrait-01-3x4-1.jpg",
         title: "ITZY",
-        desc: "ITZY (있지) is a 5-member girl group under JYP Entertainment. They consist of: Yeji, Lia, Ryujin, Chaeryeong and Yuna. They debuted on February 11, 2019 with their first single album “IT’z Different”, and the Title Track “Dalla Dalla”.",
+        desc: "Itzy is a South Korean girl group formed by JYP Entertainment and consisting of members Yeji, Lia, Ryujin, Chaeryeong, and Yuna. They debuted on February 12, 2019, with the release of their single album It'z Different.",
         bg: "",
     },
     {

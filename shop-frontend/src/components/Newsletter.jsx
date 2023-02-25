@@ -3,20 +3,19 @@ import styled from "styled-components"
 import { mobile } from "../responsive"
 
 const Container = styled.div`
-    height: 60vh;
+    height: 25vh;
     background-color: var(--off-white);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     ${mobile({ 
-        height: "30vh",
-        paddingBottom: "20px",
+        paddingBottom: "50px",
     })}
 `
 
 const Title = styled.h1`
-    font-size: 50px;
+    font-size: 48px;
     margin-bottom: 20px;
     ${mobile({ fontSize: "24px", marginBottom: "10px" })}
 `

@@ -1,4 +1,4 @@
-import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from "@mui/icons-material"
+import { FavoriteBorderOutlined, SearchOutlined } from "@mui/icons-material"
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../responsive";
@@ -6,7 +6,7 @@ import { mobile } from "../responsive";
 const Info = styled.div`
     opacity: 0;
     width: 100%;
-    height: 100%;
+    height: 80%;
     position: absolute;
     top: 0;
     left: 0;
@@ -91,21 +91,19 @@ const Product = ({item}) => {
             <ImageContainer>
                 <Link to={`/product/${item._id}`}>
                     <Image src={item.img} />
-                </Link>            
+                </Link>  
+            </ImageContainer>          
                 <Info>
                     <Icon>
-                        <ShoppingCartOutlined/>
-                    </Icon>
-                    <Icon>
                         <Link to={`/product/${item._id}`}>
-                        <SearchOutlined/>
+                        <SearchOutlined style={{color:"black"}}/>
                         </Link>
                     </Icon>
                     <Icon>
-                        <FavoriteBorderOutlined/>
+                        <FavoriteBorderOutlined style={{color:"black"}}/>
                     </Icon>
                 </Info>
-            </ImageContainer>
+            
             <ProductTitleText>{item.title}</ProductTitleText>            
         </Container>
     )

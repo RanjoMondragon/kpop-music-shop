@@ -1,12 +1,13 @@
 import { Add, Remove } from "@mui/icons-material"
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router"
 import { Link } from "react-router-dom"
 import StripeCheckout from "react-stripe-checkout"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
+import { removeProduct, updateQuantity } from "../redux/cartRedux"
 import { userRequest } from "../requestMethods"
 import { mobile } from "../responsive"
 
@@ -108,6 +109,7 @@ const ProductAmountContainer = styled.span`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  cursor: pointer;
 `;
 
 const ProductAmount = styled.div`
@@ -151,10 +153,31 @@ const Button = styled.button`
   font-weight: 600;
 `;
 
+const RemoveItem = styled.p`
+  font-weight: 400;
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
 const Cart = () => {
   const cart = useSelector(state=>state.cart);
   const [stripeToken, setStripeToken] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleQuantity = (type, productId) => {
+    const product = cart.products.find((p) => p._id === productId);
+    if (product) {
+      const newQuantity = type === "dec" ? product.quantity - 1 : product.quantity + 1;
+      if (newQuantity >= 1) {
+        dispatch(updateQuantity({ productId, type }));
+      }
+    }
+  };
+
+  const handleRemove = (productId) => {
+      dispatch(removeProduct( {productId} ))
+  }
 
   const onToken = (token) => {
     setStripeToken(token);
@@ -200,14 +223,15 @@ const Cart = () => {
                     <ProductVersion>
                     <b>Version:</b> {product.versions}
                     </ProductVersion>
+                    <RemoveItem onClick={() => handleRemove(product._id)}>Remove Item</RemoveItem>
                   </Details>
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add/>
+                    <Remove onClick={()=>handleQuantity("dec", product._id)}/>
                     <ProductAmount>
                     {product.quantity ? product.quantity : "n"}</ProductAmount>
-                    <Remove/>
+                    <Add onClick={()=>handleQuantity("asc", product._id)}/>
                   </ProductAmountContainer>
                   <ProductPrice>${product.price*product.quantity}</ProductPrice>
                 </PriceDetail>

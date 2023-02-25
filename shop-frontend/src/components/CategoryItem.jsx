@@ -5,7 +5,7 @@ import { mobile } from "../responsive";
 const Container = styled.div`
     flex: 1;
     margin: 3px;
-    height: 70vh;
+    height: 60vh;
     position: relative;
 `;
 
@@ -23,7 +23,7 @@ const Image = styled.img`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    ${mobile({ height: "20vh" })}
+    ${mobile({ height: "20dvh" })}
 `;
 const Title = styled.h1`
     color: white;
@@ -59,7 +59,7 @@ function CategoryItem({item}) {
         <Image src={item.img} />
         <Overlay/>
         <Info>
-            <Title>{item.title}</Title>
+            <Title>{item.category}</Title>
             <Button>SHOP NOW</Button>
         </Info>
         </Link>
