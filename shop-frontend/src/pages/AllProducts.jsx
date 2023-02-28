@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
@@ -17,6 +18,7 @@ const Title = styled.h1`
 
 const FilterContainer = styled.div`
     display: flex;
+    align-items: center;
     justify-content: space-between;
 `;
 
@@ -40,6 +42,16 @@ const Select = styled.select`
 
 const Option = styled.option``;
 
+const Redirect = styled.button`
+    padding: 0 10px;
+    margin-right: 20px;
+    font-size: 16px;
+    background-color: transparent;
+    cursor: pointer;
+    width: 200px;
+    height: 40px;
+`;
+
 const AllProducts = () => {
     const [sort, setSort] = useState("newest");
 
@@ -58,6 +70,9 @@ const AllProducts = () => {
                         <Option value="Z-A">Alphabetical: Z-A</Option>
                     </Select>
                 </Filter>
+                <Link to="/" style={{color:"black", textDecoration: "none"}}>
+                    <Redirect>Return to Home Page</Redirect>
+                </Link>
             </FilterContainer>
             <Products category="" sort={sort}/>
             <Newsletter/>

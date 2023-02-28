@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
@@ -18,6 +19,7 @@ const Title = styled.h1`
 
 const FilterContainer = styled.div`
     display: flex;
+    align-items: center;
     justify-content: space-between;
 `;
 
@@ -41,6 +43,19 @@ const Select = styled.select`
 
 const Option = styled.option``;
 
+const Redirect = styled.button`
+    padding: 0 10px;
+    margin-right: 20px;
+    font-size: 16px;
+    background-color: transparent;
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+    ${mobile({ 
+        display:"none"
+    })}
+`;
+
 const ProductList = () => {
     const location = useLocation();
     const category = decodeURI(location.pathname.split("/")[2])
@@ -62,7 +77,10 @@ const ProductList = () => {
                         <Option value="A-Z">Alphabetical: A-Z</Option>
                         <Option value="Z-A">Alphabetical: Z-A</Option>
                     </Select>
-                </Filter>
+                </Filter>            
+                <Link to="/" style={{color:"black", textDecoration: "none"}}>
+                    <Redirect>Home</Redirect>
+                </Link>
             </FilterContainer>
             <Products category={category} sort={sort}/>
             <Newsletter/>
