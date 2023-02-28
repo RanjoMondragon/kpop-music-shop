@@ -7,7 +7,8 @@ import styled from 'styled-components'
 import { mobile } from '../responsive';
 import GlobalStyle from '../globalstyle';
 import MobileNavbar from './MobileNavbar';
-import { logout } from '../redux/userRedux';
+import { clearSessionData, logout } from '../redux/userRedux';
+import { resetCart } from '../redux/cartRedux';
 
 const Container = styled.div`
     position: fixed;
@@ -92,7 +93,9 @@ const Navbar = () => {
     const user = useSelector((state) => state.user.currentUser);
 
     const handleLogout = () => {
-        dispatch(logout()); 
+        dispatch(logout());
+        dispatch(resetCart());
+        clearSessionData(); 
     }
 
     return (
@@ -127,12 +130,6 @@ const Navbar = () => {
                         <MenuItem onClick={handleLogout}>LOG OUT</MenuItem>
                         </Link>
                     )}                    
-                    {/* <Link to="/register" style={{color:"black", textDecoration: "none"}}>
-                        <MenuItem>REGISTER</MenuItem>
-                    </Link>
-                    <Link to="/login" style={{color:"black", textDecoration: "none"}}>
-                        <MenuItem>LOG IN</MenuItem>
-                    </Link> */}
                     <Link to="/cart" style={{color:"black"}}>
                         <MenuItem>
                             <Badge badgeContent={quantity} color="primary">

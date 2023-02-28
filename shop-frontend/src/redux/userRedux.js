@@ -20,10 +20,18 @@ const userSlice = createSlice({
             state.error= true;
         },
         logout:(state) => {
-            state.currentUser = null;
+            state.isFetching = false;
+            state.error = false;
+            state.currentUser = null;            
         }
     },
 });
 
 export const {loginStart, loginSuccess, loginFailure, logout} = userSlice.actions;
 export default userSlice.reducer;
+
+//Session expire upon logout
+export const clearSessionData = () => {
+    localStorage.removeItem('userToken');
+    return logout();
+};
