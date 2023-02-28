@@ -6,7 +6,6 @@ import Product from "./Product"
 
 const Container = styled.div`
     display: flex;
-    height: 90dvh;
     padding: 0px 20px 20px 20px;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -15,23 +14,7 @@ const Container = styled.div`
     })}
 `
 
-const ProductsButtonContainer = styled.div`
-    display: flex;
-    flex-basis: 100%;
-    height: 50px;
-`;
-
-const ProductsButton = styled.button`
-    padding: 0 10px;
-    margin-left: 3px;
-    font-size: 16px;
-    background-color: transparent;
-    cursor: pointer;
-    width: 150px;
-    height: 50px;
-`;
-
-const Products = ({category, sort, showAllCategories}) => {
+const Products = ({category, sort}) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -39,7 +22,7 @@ const Products = ({category, sort, showAllCategories}) => {
     const getProducts = async () => {
       try {
         let url = "http://localhost:5000/api/products";
-        if (!showAllCategories) {
+        if (category) {
           url += `?category=${category}`;
         }
         const res = await axios.get(url);
@@ -50,7 +33,7 @@ const Products = ({category, sort, showAllCategories}) => {
     };
     
     getProducts();
-  }, [category, showAllCategories]);
+  }, [category]);
 
   useEffect(() => {
     if (sort === "newest") {
@@ -68,10 +51,7 @@ const Products = ({category, sort, showAllCategories}) => {
         <Product item={item} key={item._id} />
       )) : products.slice(0, 8).map((item) => (
         <Product item={item} key={item._id} />
-      ))}
-      <ProductsButtonContainer>
-        <ProductsButton>See all products</ProductsButton>
-      </ProductsButtonContainer>
+      ))}      
     </Container>
   );
 }

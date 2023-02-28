@@ -7,6 +7,7 @@ import Products from '../components/Products'
 import Slider from '../components/Slider'
 import styled from 'styled-components'
 import { mobile } from '../responsive'
+import AllProductsButton from '../components/AllProductsButton'
 
 const Title = styled.h1`
     font-weight: 700;
@@ -27,6 +28,7 @@ const Home = () => {
         <Categories />
         <Title>Featured Products</Title>
         <Products />
+        <AllProductsButton/>
         <Newsletter />    
         <Footer/>
     </div>
