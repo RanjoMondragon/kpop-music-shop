@@ -36,6 +36,7 @@ const SocialIcon = styled.div`
     align-items: center;
     justify-content: center;
     margin-right: 20px;
+    cursor: pointer;
 `
 
 const Center = styled.div`
@@ -105,7 +106,7 @@ const Footer = () => {
         </Center>
         <Right>
             <Title>Contact Us</Title>
-            <ContactItem><Email style={{marginRight:"5px"}}/>kpopify@email.com</ContactItem>
+            <ContactItem><Email style={{marginRight:"5px"}}/>kpopmusicshop@email.com</ContactItem>
             <ContactItem><Phone style={{marginRight:"5px"}}/>+1 123-456-78890</ContactItem>
             <ContactItem><LocationOn style={{marginRight:"5px"}}/> 424 CD Path, Wild West, A1B 2C3</ContactItem>
             <Payment src=""/>
