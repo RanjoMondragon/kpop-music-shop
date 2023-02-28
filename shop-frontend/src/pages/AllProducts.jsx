@@ -48,8 +48,11 @@ const Redirect = styled.button`
     font-size: 16px;
     background-color: transparent;
     cursor: pointer;
-    width: 200px;
+    width: 100px;
     height: 40px;
+    ${mobile({ 
+        display:"none"
+    })}
 `;
 
 const AllProducts = () => {
@@ -71,7 +74,7 @@ const AllProducts = () => {
                     </Select>
                 </Filter>
                 <Link to="/" style={{color:"black", textDecoration: "none"}}>
-                    <Redirect>Return to Home Page</Redirect>
+                    <Redirect>Home</Redirect>
                 </Link>
             </FilterContainer>
             <Products category="" sort={sort}/>
