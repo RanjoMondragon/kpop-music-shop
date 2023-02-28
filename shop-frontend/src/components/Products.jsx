@@ -6,6 +6,7 @@ import Product from "./Product"
 
 const Container = styled.div`
     display: flex;
+    height: 90dvh;
     padding: 0px 20px 20px 20px;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -14,30 +15,34 @@ const Container = styled.div`
     })}
 `
 
-const Title = styled.h1`
-    font-weight: 700;
-    flex-grow: 1;
+const ProductsButtonContainer = styled.div`
+    display: flex;
     flex-basis: 100%;
-    text-align: center;
-    padding-bottom: 20px;
-    ${mobile({ 
-      padding: "10px 0px",
-    })}
+    height: 50px;
 `;
 
+const ProductsButton = styled.button`
+    padding: 0 10px;
+    margin-left: 3px;
+    font-size: 16px;
+    background-color: transparent;
+    cursor: pointer;
+    width: 150px;
+    height: 50px;
+`;
 
-const Products = ({category, sort}) => {
+const Products = ({category, sort, showAllCategories}) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await axios.get(
-          category
-            ? `http://localhost:5000/api/products?category=${category}`
-            : "http://localhost:5000/api/products"
-        );
+        let url = "http://localhost:5000/api/products";
+        if (!showAllCategories) {
+          url += `?category=${category}`;
+        }
+        const res = await axios.get(url);
         setProducts(res.data);
       } catch (err) {
         console.log(err);
@@ -45,7 +50,7 @@ const Products = ({category, sort}) => {
     };
     
     getProducts();
-  }, [category]);
+  }, [category, showAllCategories]);
 
   useEffect(() => {
     if (sort === "newest") {
@@ -59,12 +64,14 @@ const Products = ({category, sort}) => {
 
   return (
     <Container>
-      <Title>Featured Products</Title>
       {category ? filteredProducts.map((item) => (
         <Product item={item} key={item._id} />
       )) : products.slice(0, 8).map((item) => (
         <Product item={item} key={item._id} />
       ))}
+      <ProductsButtonContainer>
+        <ProductsButton>See all products</ProductsButton>
+      </ProductsButtonContainer>
     </Container>
   );
 }

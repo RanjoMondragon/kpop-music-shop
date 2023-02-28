@@ -5,6 +5,19 @@ import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter'
 import Products from '../components/Products'
 import Slider from '../components/Slider'
+import styled from 'styled-components'
+import { mobile } from '../responsive'
+
+const Title = styled.h1`
+    font-weight: 700;
+    flex-grow: 1;
+    flex-basis: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+    ${mobile({ 
+      padding: "10px 0px",
+    })}
+`;
 
 const Home = () => {
   return (
@@ -12,6 +25,7 @@ const Home = () => {
         <Navbar/>
         <Slider />
         <Categories />
+        <Title>Featured Products</Title>
         <Products />
         <Newsletter />    
         <Footer/>
