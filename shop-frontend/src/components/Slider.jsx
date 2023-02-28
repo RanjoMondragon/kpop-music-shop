@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components"
 import { sliderItems } from "../data";
 import { mobile } from "../responsive";
@@ -118,7 +119,9 @@ const Slider = () => {
                 <Feature>Featured Artist: </Feature>
                 <Title>{item.title}</Title>
                 <Desc>{item.desc}</Desc>
-                <Button>SHOP NOW!</Button>
+                <Link to={`/product/${item._id}`}>
+                    <Button>SHOP NOW!</Button>
+                </Link>
             </InfoContainer>
             </Slide>
             ))}

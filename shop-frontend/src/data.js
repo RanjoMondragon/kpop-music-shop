@@ -1,23 +1,26 @@
 export const sliderItems = [
     {
         id: 1,
-        img: "https://elle.com.sg/wp-content/uploads/2022/08/CHARLES-KEITH-fall-2022-campaign-brand-ambassador-itzy-portrait-01-3x4-1.jpg",
-        title: "ITZY",
-        desc: "Itzy is a South Korean girl group formed by JYP Entertainment and consisting of members Yeji, Lia, Ryujin, Chaeryeong, and Yuna. They debuted on February 12, 2019, with the release of their single album It'z Different.",
+        img: "https://people.com/thmb/T8kvvwHGfpK88U-eui0liKgzNwQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(719x169:721x171):format(webp)/Twice-Moonlight-Sunrise-011723-1-df5d1498c5fd43f0b55670adc9ee5716.jpg",
+        title: "Twice",
+        _id:"63fdd3fc81e7fffe3f9f1bc5",
+        desc: "Twice is a South Korean girl group formed by JYP Entertainment. The group is composed of nine members: Nayeon, Jeongyeon, Momo, Sana, Jihyo, Mina, Dahyun, Chaeyoung, and Tzuyu. Twice was formed under the television program Sixteen and debuted on October 20, 2015, with the extended play The Story Begins.",
         bg: "",
     },
     {
         id: 2,
         img: "https://uploads.disquscdn.com/images/ac6ec855796c11715ebb224547ea9c765b35e6c79aafc9dddc30cac560da58b9.jpg",
         title: "STAYC",
+        _id:"63fdd7ad81e7fffe3f9f1bd1",
         desc: "STAYC (스테이씨) (Formerly known as HIGHUP Girls) is a 6-member girl group under High Up Entertainment. They consists of: Sieun, Seeun, Sumin, J, Isa and Yoon. They debuted on November 12, 2020 with their first single album “Star To A Young Culture”.",
         bg: "",
     },
     {
         id: 3,
-        img: "https://pbs.twimg.com/media/FW6UxxNagAEUJ_n?format=jpg&name=4096x4096",
-        title: "aespa",
-        desc: "aespa (에스파), stylized as æspa, is a 4 member South Korean girl group under SM Entertainment. The group consists of Karina, Giselle, Winter and NingNing. They debuted on November 17, 2020 with the digital single “Black Mamba“. On June 2, 2022 it has been announced that aespa has signed with Warner Records for global promotions.",
+        img: "https://i.scdn.co/image/ab6761610000e5eb7243217f4767a4d9bf879a6e",
+        title: "Cherry Bullet",
+        _id:"63fdd50f81e7fffe3f9f1bc7",
+        desc: "Cherry Bullet is a South Korean girl group formed by FNC Entertainment and managed under their sub-label FNC W. They debuted on January 21, 2019, with their first single album titled Let's Play Cherry Bullet. The group currently consists of seven members: Haeyoon, Yuju, Bora, Jiwon, Remi, Chaerin and May.",
         bg: "",
     },
 ];
