@@ -252,7 +252,7 @@ const Cart = () => {
               </SummaryItem>
               <SummaryItem>
                 <SummaryItemText type="total">Total</SummaryItemText>
-                <SummaryItemPrice>${cart.total*1.15}</SummaryItemPrice>
+                <SummaryItemPrice>${(cart.total*1.15).toFixed(2)}</SummaryItemPrice>
               </SummaryItem>
               <StripeCheckout
                 name="KPOP MUSIC SHOP"
