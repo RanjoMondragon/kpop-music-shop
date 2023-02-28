@@ -5,7 +5,7 @@ import { mobile } from "../responsive";
 const Container = styled.div`
     flex: 1;
     margin: 3px;
-    height: 60vh;
+    height: 30dvh;
     position: relative;
 `;
 
@@ -15,15 +15,18 @@ const Overlay = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(0deg, #00000088 30%, #ffffff44 100%);
+    background: linear-gradient(0deg, #00000088 40%, #ffffff44 100%);
     z-index: 1;
 `;
 
 const Image = styled.img`
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    ${mobile({ height: "20dvh" })}
+    object-fit: contain;
+    ${mobile({ 
+        height: "150px",
+        objectFit: "cover",
+    })}
 `;
 const Title = styled.h1`
     color: white;
@@ -33,6 +36,7 @@ const Title = styled.h1`
     text-align: center;
     margin-bottom: 20px;
     z-index: 2;
+    ${mobile({ fontSize: "28px" })}
 `;
 const Info = styled.div`
     position: absolute;

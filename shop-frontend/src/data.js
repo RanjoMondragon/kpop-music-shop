@@ -25,12 +25,12 @@ export const sliderItems = [
 export const categories = [
     {
         id: 1,
-        img: "https://m.media-amazon.com/images/I/41152B6CdEL._AC_.jpg",
+        img: "https://m.media-amazon.com/images/I/61fgxylhCsL._AC_SL1500_.jpg",
         category: "Albums",
     },
     {
         id: 2,
-        img: "https://i.ebayimg.com/images/g/K0kAAOSw1exjkQoJ/s-l500.png",
+        img: "https://cdn.shopify.com/s/files/1/0426/3496/9247/products/1_1cd63e9a-3043-41a0-948a-bc967c62bcf3_800x.jpg?v=1674778635",
         category: "Posters",
     },
     {
