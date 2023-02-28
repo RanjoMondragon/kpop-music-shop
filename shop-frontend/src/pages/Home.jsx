@@ -27,7 +27,7 @@ const Home = () => {
         <Slider />
         <Categories />
         <Title>Featured Products</Title>
-        <Products />
+        <Products isHomePage={true}/>
         <AllProductsButton/>
         <Newsletter />    
         <Footer/>

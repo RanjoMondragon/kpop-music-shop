@@ -77,7 +77,7 @@ const AllProducts = () => {
                     <Redirect>Home</Redirect>
                 </Link>
             </FilterContainer>
-            <Products category="" sort={sort}/>
+            <Products category="" sort={sort} isHomePage={false}/>
             <Newsletter/>
             <Footer/>
         </Container>

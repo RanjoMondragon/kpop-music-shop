@@ -14,7 +14,7 @@ const Container = styled.div`
     })}
 `
 
-const Products = ({category, sort}) => {
+const Products = ({category, sort, isHomePage}) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -49,9 +49,9 @@ const Products = ({category, sort}) => {
     <Container>
       {category ? filteredProducts.map((item) => (
         <Product item={item} key={item._id} />
-      )) : products.slice(0, 8).map((item) => (
-        <Product item={item} key={item._id} />
-      ))}      
+      )) : products.slice(0, isHomePage ? 8 : 16).map((item) => (
+      <Product item={item} key={item._id} />
+      ))}    
     </Container>
   );
 }
