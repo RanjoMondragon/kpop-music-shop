@@ -70,6 +70,11 @@ const Redirect = styled.a`
     margin: 5px 0px;
     cursor: pointer;
 `
+const Error = styled.span`
+    color: red;
+    padding-bottom: 10px;
+    text-align: center;
+`
 
 const Register = () => {
     const [password, setPassword] = useState('');
@@ -156,7 +161,7 @@ const Register = () => {
                         }                   
                     </PasswordChecklist>
                     <Input placeholder="Please confirm password" type="password" onChange={handleConfirmPassword}/>
-                    {password !== confirmPassword && confirmPassword !== "" && (<div style={{ color: "red", paddingBottom: "10px" }}>Passwords do not match</div>)}
+                    {password !== confirmPassword && confirmPassword !== "" && (<Error>Passwords do not match</Error>)}
                     <Button disabled={!isPasswordMatch}>CREATE</Button>
                     <Redirect>
                     <Link to="/" style={{color:"gray", textDecoration: "none"}}>Return to Shop
