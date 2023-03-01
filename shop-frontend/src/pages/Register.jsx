@@ -5,7 +5,8 @@ import { mobile } from "../responsive"
 import PasswordStrengthBar from 'react-password-strength-bar';
 import { useState } from "react";
 import { Cancel, CheckCircle } from "@mui/icons-material";
-import { Icon } from "@mui/material";
+import { Alert, Icon, Snackbar } from "@mui/material";
+import axios from "axios";
 
 
 const Container = styled.div`
@@ -77,6 +78,8 @@ const Error = styled.span`
 `
 
 const Register = () => {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isLengthValid, setIsLengthValid] = useState(false);
@@ -84,6 +87,7 @@ const Register = () => {
     const [hasUpperCase, setHasUpperCase] = useState(false);
     const [hasNumber, setHasNumber] = useState(false);
     const [isPasswordMatch, setIsPasswordMatch] = useState(true);
+    const [open, setOpen] = useState(false);
       
     const isPasswordValid = (password) => {
         const lengthRegex = /.{8,}/;
@@ -110,9 +114,37 @@ const Register = () => {
     };
     
     const handleConfirmPassword = (event) => {
-        setConfirmPassword(event.target.value);
-        setIsPasswordMatch(event.target.value === password);
+        const value = event.target.value;
+        setConfirmPassword(value);
+        setIsPasswordMatch(value === password);
     };
+
+    const handleClickSnackbar = () => {
+        setOpen(true);
+      };
+      
+      const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+      
+        setOpen(false);
+      };    
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+          const res = await axios.post('http://localhost:5000/api/users/register', {
+            username,
+            email,
+            password,
+          });
+          console.log(res.data);
+          handleClickSnackbar();
+        } catch (err) {
+          console.log(err);
+        }
+      };
 
     return (
         <div>
@@ -120,9 +152,9 @@ const Register = () => {
         <Container>
             <Wrapper>
                 <Title>CREATE AN ACCOUNT</Title>
-                <Form>
-                    <Input placeholder="example@domain.com"/>
-                    <Input placeholder="Username"/>
+                <Form onSubmit={handleSubmit}>
+                    <Input placeholder="example@domain.com" type="email" onChange={(e) => setEmail(e.target.value)}/>
+                    <Input placeholder="Username" type="text" onChange={(e) => setUsername(e.target.value)}/>
                     <Input placeholder="Password" type="password" onChange={handlePasswordComplexity}/>
                     {password && <PasswordStrengthBar password={password} style={{ width: '85%', textAlign: 'center' }} />}
                     <PasswordChecklist>
@@ -162,13 +194,17 @@ const Register = () => {
                     </PasswordChecklist>
                     <Input placeholder="Please confirm password" type="password" onChange={handleConfirmPassword}/>
                     {password !== confirmPassword && confirmPassword !== "" && (<Error>Passwords do not match</Error>)}
-                    <Button disabled={!isPasswordMatch}>CREATE</Button>
+                    <Button type="submit" disabled={!isPasswordMatch}>CREATE</Button>
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+                        <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+                            Your account was created successfully!
+                        </Alert>
+                    </Snackbar>
                     <Redirect>
-                    <Link to="/" style={{color:"gray", textDecoration: "none"}}>Return to Shop
-                    </Link>
+                        <Link to="/" style={{color:"gray", textDecoration: "none"}}>Return to Shop
+                        </Link>
                     </Redirect> 
-                </Form>
-                
+                </Form>                
             </Wrapper>
         </Container>
         </div>

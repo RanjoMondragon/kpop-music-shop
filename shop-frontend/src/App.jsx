@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
 import Home from "./pages/Home";
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 import PoliciesPage from './pages/PoliciesPage';
 import ProductList from "./pages/ProductList";
 import Product from "./pages/Product";
@@ -14,13 +13,6 @@ import Profile from "./pages/Profile";
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!user) {
-      navigate('/login');
-    }
-  }, [user, navigate]);
 
   return (
     <div>
@@ -32,8 +24,8 @@ const App = () => {
         <Route path="/products/:category" element={<ProductList/>} />
         <Route path="/product/:id" element={<Product/>} />
         <Route path="/success" element={<Success/>} />
-        <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />
-        <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
         { user && <Route path="/profile" element={<Profile/>} />}
       </Routes>
     </div>
