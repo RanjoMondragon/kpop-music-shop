@@ -4,7 +4,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
-import { mobile } from '../responsive';
+import { mobile, tablet } from '../responsive';
 import GlobalStyle from '../globalstyle';
 import MobileNavbar from './MobileNavbar';
 import { clearSessionData, logout } from '../redux/userRedux';
@@ -66,6 +66,7 @@ const Input = styled.input`
 const Logo = styled.h1`
     font-weight: bold;
     ${mobile({ display: "none" })}
+    ${tablet({ fontSize: "3dvw" })}
 `;
 
 const Center = styled.div`
@@ -78,6 +79,7 @@ const Right = styled.div`
     align-items: center;
     justify-content: flex-end;
     ${mobile({ display: "none" })}
+    /* ${tablet({ display: "none" })} */
 `;
 
 const MenuItem = styled.div`

@@ -1,7 +1,7 @@
 export const sliderItems = [
     {
         id: 1,
-        img: "https://people.com/thmb/T8kvvwHGfpK88U-eui0liKgzNwQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(719x169:721x171):format(webp)/Twice-Moonlight-Sunrise-011723-1-df5d1498c5fd43f0b55670adc9ee5716.jpg",
+        img: "https://www.bu.edu/lernet/artemis/years/2021/projects/StudentWebsites/EunjeePriyanka/twice.jpg",
         title: "Twice",
         _id:"63fdd3fc81e7fffe3f9f1bc5",
         desc: "Twice is a South Korean girl group formed by JYP Entertainment. The group is composed of nine members: Nayeon, Jeongyeon, Momo, Sana, Jihyo, Mina, Dahyun, Chaeyoung, and Tzuyu. Twice was formed under the television program Sixteen and debuted on October 20, 2015, with the extended play The Story Begins.",
