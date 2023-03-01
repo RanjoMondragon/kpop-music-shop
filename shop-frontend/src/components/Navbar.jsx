@@ -1,4 +1,4 @@
-import {Search, ShoppingCartOutlined } from '@mui/icons-material';
+import {AccountCircle, Search, ShoppingCartOutlined } from '@mui/icons-material';
 import { Badge } from '@mui/material';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -128,9 +128,14 @@ const Navbar = () => {
                     </>
                     ) 
                     : (
-                        <Link to="/" style={{ color: "black", textDecoration: "none" }}>
-                        <MenuItem onClick={handleLogout}>LOG OUT</MenuItem>
+                    <>
+                        <Link to="/profile" style={{ color: "black", textDecoration: "none" }}>
+                            <AccountCircle/>
                         </Link>
+                        <Link to="/" style={{ color: "black", textDecoration: "none" }}>
+                            <MenuItem onClick={handleLogout}>LOG OUT</MenuItem>
+                        </Link>
+                    </>
                     )}                    
                     <Link to="/cart" style={{color:"black"}}>
                         <MenuItem>

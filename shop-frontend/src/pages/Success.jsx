@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLocation } from 'react-router'
 
-const Sucess = () => {
+const Success = () => {
     const location = useLocation();
     console.log(location);
   return (
@@ -11,4 +11,4 @@ const Sucess = () => {
   )
 }
 
-export default Sucess
+export default Success
