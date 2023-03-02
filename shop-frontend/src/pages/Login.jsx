@@ -1,9 +1,10 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import Navbar from "../components/Navbar"
 import { login } from "../redux/apiCalls"
+import { loginFailure, loginStart} from "../redux/userRedux"
 import { mobile } from "../responsive"
 
 const Container = styled.div`
@@ -82,11 +83,21 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
     const {isFetching, error} = useSelector((state) => state.user);
+    const navigate = useNavigate();
 
     const handleClick = (e) => {
-        e.preventDefault()
-        login(dispatch, {username, password})
-    }
+        e.preventDefault();
+        dispatch(loginStart());
+        login(dispatch, { username, password })
+          .then(() => {
+            navigate('/');
+          })
+          .catch((error) => {
+            dispatch(loginFailure());
+          });
+      };
+      
+    
     return (
         <div>
         <Navbar/>
