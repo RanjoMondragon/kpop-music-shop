@@ -129,8 +129,8 @@ const Navbar = () => {
                     ) 
                     : (
                     <>
-                        <Link to="/profile" style={{ color: "black", textDecoration: "none" }}>
-                            <AccountCircle/>
+                        <Link to={`/profile/${user._id}`} style={{ color: "black", textDecoration: "none" }}>
+                            <AccountCircle />
                         </Link>
                         <Link to="/" style={{ color: "black", textDecoration: "none" }}>
                             <MenuItem onClick={handleLogout}>LOG OUT</MenuItem>
