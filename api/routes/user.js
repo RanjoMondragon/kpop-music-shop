@@ -3,36 +3,39 @@ const { verifyToken, verifyTokenandAuthorization, verifyTokenandAdmin } = requir
 
 const router = require("express").Router();
 
-//CREATE
-router.post("/register", async (req, res) => {
-    const newUser = new User({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-    });
-    try {
-      const savedUser = await newUser.save();
-      res.status(201).json(savedUser);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
-
 //UPDATE
 router.put("/:id", verifyTokenandAuthorization, async (req,res) => {
     if(req.body.password){
-        req.body.password = CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC).toString();
-    } 
-
+      req.body.password = CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC).toString();
+    }
+  
     try{
-        const updatedUser = await User.findByIdAndUpdate(req.params.id, {
-            $set: req.body
-        }, {new:true});
+        // Check if user exists
+        const userToUpdate = await User.findById(req.params.id);
+        if (!userToUpdate) {
+            return res.status(404).json({ message: "User not found" });
+        }
+    
+        // Check if the user is authorized to update their own account
+        if (userToUpdate._id.toString() !== req.user._id.toString()) {
+            return res.status(403).json({ message: "Unauthorized" });
+        }
+    
+        // Update the user object with the new data
+        userToUpdate.firstName = req.body.firstName;
+        userToUpdate.lastName = req.body.lastName;
+        userToUpdate.email = req.body.email;
+        userToUpdate.phone = req.body.phone;
+    
+        // Save the updated user object
+        const updatedUser = await userToUpdate.save();
+    
         res.status(200).json(updatedUser);
-    } catch(err){
+        } catch(err){
         res.status(500).json(err);
     }
 });
+  
 
 //DELETE
 router.delete("/:id", verifyTokenandAuthorization, async (req,res) => {
