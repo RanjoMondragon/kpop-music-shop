@@ -10,17 +10,9 @@ import Success from "./pages/Success";
 import { useSelector } from "react-redux";
 import AllProducts from "./pages/AllProducts";
 import Profile from "./pages/Profile";
-import { useEffect } from "react";
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!user) {
-      navigate('/login');
-    }
-  }, [user, navigate]);
 
   return (
     <div>
