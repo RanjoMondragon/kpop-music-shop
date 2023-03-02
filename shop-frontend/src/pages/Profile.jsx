@@ -1,11 +1,13 @@
 import { Cancel, CheckCircle } from '@mui/icons-material'
-import { Icon } from '@mui/material'
+import { Alert, Icon, Snackbar } from '@mui/material'
 import React, { useState } from 'react'
 import PasswordStrengthBar from 'react-password-strength-bar'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import Navbar from '../components/Navbar'
 import { mobile } from '../responsive'
+import axios from "axios";
+import { useSelector } from 'react-redux'
 
 const Container = styled.div`
     height: 90dvh;
@@ -85,6 +87,9 @@ const Error = styled.span`
 `
 
 function Profile() {
+    const currentUser = useSelector(state => state.user.currentUser);
+    const [username, setUsername] = useState(currentUser.username);
+    const [email, setEmail] = useState(currentUser.email);
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isLengthValid, setIsLengthValid] = useState(false);
@@ -92,6 +97,25 @@ function Profile() {
     const [hasUpperCase, setHasUpperCase] = useState(false);
     const [hasNumber, setHasNumber] = useState(false);
     const [isPasswordMatch, setIsPasswordMatch] = useState(true);
+    const [successOpen, setSuccessOpen] = useState(false);
+    const [errorOpen, setErrorOpen] = useState(false);
+    const { userId } = useParams();
+    const userToken = localStorage.getItem('userToken');
+    console.log('User token:', userToken);
+    const [isFormDirty, setIsFormDirty] = useState(false);
+    const [isEmailDirty, setIsEmailDirty] = useState(false);
+    const [isUsernameDirty, setIsUsernameDirty] = useState(false);
+
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+        setIsEmailDirty(true);
+      };
+      
+      const handleUsernameChange = (event) => {
+        setUsername(event.target.value);
+        setIsUsernameDirty(true);
+      };
+
       
     const isPasswordValid = (password) => {
         const lengthRegex = /.{8,}/;
@@ -118,21 +142,78 @@ function Profile() {
     };
     
     const handleConfirmPassword = (event) => {
-        setConfirmPassword(event.target.value);
-        setIsPasswordMatch(event.target.value === password);
+        const value = event.target.value;
+        setConfirmPassword(value);
+        setIsPasswordMatch(value === password);
     };
+
+    const handleSuccessClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }    
+        setSuccessOpen(false);
+    };
+    
+    const handleErrorClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }    
+        setErrorOpen(false);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+          const data = {};
+          if (isEmailDirty) {
+            data.email = email;
+          }
+          if (isUsernameDirty) {
+            data.username = username;
+          }
+          if (password) {
+            data.password = password;
+          }
+      
+          const res = await axios.put(`http://localhost:5000/api/users/${userId}`, data, {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          });
+      
+          setSuccessOpen(true);
+          setIsFormDirty(false);
+          console.log(res.data);
+        } catch (err) {
+          setErrorOpen(true);
+          console.log(err);
+        }
+    };     
+
     return (
         <Container>
             <Navbar/>
             <Wrapper>
                 <Title>User Profile</Title>
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     <FormText>Change email: </FormText>
-                    <Input placeholder="example@domain.com"/>
+                    <Input 
+                        placeholder="example@domain.com" 
+                        value={email} 
+                        onChange={handleEmailChange}
+                    />
                     <FormText>Change Username: </FormText>
-                    <Input placeholder="Username"/>
+                    <Input 
+                        placeholder="Username" 
+                        value={username} 
+                        onChange={handleUsernameChange}                            
+                    />
                     <FormText>Change Password: </FormText>
-                    <Input placeholder="Password" type="password" onChange={handlePasswordComplexity}/>
+                    <Input 
+                        placeholder="Password" 
+                        type="password" 
+                        onChange={handlePasswordComplexity}                    
+                    />
                     {password && <PasswordStrengthBar password={password} style={{ width: '85%', textAlign: 'center' }} />}
                     <PasswordChecklist>
                         Password must contain: 
@@ -172,7 +253,17 @@ function Profile() {
                     <FormText>Confirm Password: </FormText>
                     <Input placeholder="Please confirm password" type="password" onChange={handleConfirmPassword}/>
                     {password !== confirmPassword && confirmPassword !== "" && (<Error>Passwords do not match</Error>)}
-                    <Button disabled={!isPasswordMatch}>Update</Button>
+                    <Button type="submit" disabled={!isPasswordMatch && !isFormDirty}>Update</Button>
+                    <Snackbar open={successOpen} autoHideDuration={6000} onClose={handleSuccessClose}>
+                        <Alert onClose={handleSuccessClose} severity="success" sx={{ width: '100%' }} variant="filled">
+                            Your account details have been updated!
+                        </Alert>
+                    </Snackbar>
+                    <Snackbar open={errorOpen} autoHideDuration={6000} onClose={handleErrorClose}>
+                        <Alert onClose={handleErrorClose} severity="error" sx={{ width: '100%' }} variant="filled">
+                            Error updating account details.
+                        </Alert>
+                    </Snackbar>
                     <Redirect>
                     <Link to="/" style={{color:"gray", textDecoration: "none"}}>Return to Shop
                     </Link>
