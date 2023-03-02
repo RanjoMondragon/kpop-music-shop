@@ -1,5 +1,5 @@
 import Home from "./pages/Home";
-import { Routes, Route, useNavigate, Navigate} from 'react-router-dom';
+import { Routes, Route, Navigate} from 'react-router-dom';
 import PoliciesPage from './pages/PoliciesPage';
 import ProductList from "./pages/ProductList";
 import Product from "./pages/Product";
