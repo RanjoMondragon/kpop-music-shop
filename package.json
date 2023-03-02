@@ -1,12 +1,12 @@
 {
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.2",
-    "react-redux": "^8.0.5"
+    "react-redux": "^8.0.5",
+    "vercel": "^28.16.11"
   },
   "name": "shop",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "build": "cd api && npm install && cd ../shop-frontend && npm install && npm run build",
     "start": "node api/server.js",
