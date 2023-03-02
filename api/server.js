@@ -28,8 +28,6 @@ app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", stripeRoute);
 
-__dirname = path.resolve();
-app.use(express.static(path.join(__dirname, '/shop-frontend/build')));
 app.get('*', (req, res) =>
   res.sendFile(path.join(__dirname, 'shop-frontend/build/index.html')));
 
@@ -38,3 +36,5 @@ app.listen(port , () => {
   console.log(`Serve at http://localhost:${port}`);
 });
 
+__dirname = path.resolve();
+app.use(express.static(path.join(__dirname, '/shop-frontend/build')));
