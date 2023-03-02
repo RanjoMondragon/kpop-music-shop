@@ -87,7 +87,8 @@ const Register = () => {
     const [hasUpperCase, setHasUpperCase] = useState(false);
     const [hasNumber, setHasNumber] = useState(false);
     const [isPasswordMatch, setIsPasswordMatch] = useState(true);
-    const [open, setOpen] = useState(false);
+    const [successOpen, setSuccessOpen] = useState(false);
+    const [errorOpen, setErrorOpen] = useState(false);
       
     const isPasswordValid = (password) => {
         const lengthRegex = /.{8,}/;
@@ -118,31 +119,32 @@ const Register = () => {
         setConfirmPassword(value);
         setIsPasswordMatch(value === password);
     };
-
-    const handleClickSnackbar = () => {
-        setOpen(true);
-      };
       
-      const handleCloseSnackbar = (event, reason) => {
+    const handleSuccessClose = (event, reason) => {
         if (reason === 'clickaway') {
-          return;
-        }
-      
-        setOpen(false);
-      };    
+            return;
+        }    
+        setSuccessOpen(false);
+    };
+    
+    const handleErrorClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }    
+        setErrorOpen(false);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const res = await axios.post('http://localhost:5000/api/users/register', {
-            username,
-            email,
-            password,
-          });
-          console.log(res.data);
-          handleClickSnackbar();
+            await axios.post('http://localhost:5000/api/users/register', {
+                username,
+                email,
+                password,
+            });
+            setSuccessOpen(true);
         } catch (err) {
-          console.log(err);
+            setErrorOpen(true);
         }
       };
 
@@ -195,9 +197,14 @@ const Register = () => {
                     <Input placeholder="Please confirm password" type="password" onChange={handleConfirmPassword}/>
                     {password !== confirmPassword && confirmPassword !== "" && (<Error>Passwords do not match</Error>)}
                     <Button type="submit" disabled={!isPasswordMatch}>CREATE</Button>
-                    <Snackbar open={open} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-                        <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+                    <Snackbar open={successOpen} autoHideDuration={6000} onClose={handleSuccessClose}>
+                        <Alert onClose={handleSuccessClose} severity="success" sx={{ width: '100%' }} variant="filled">
                             Your account was created successfully!
+                        </Alert>
+                    </Snackbar>
+                    <Snackbar open={errorOpen} autoHideDuration={6000} onClose={handleErrorClose}>
+                        <Alert onClose={handleErrorClose} severity="error" sx={{ width: '100%' }} variant="filled">
+                            Error creating account.
                         </Alert>
                     </Snackbar>
                     <Redirect>
