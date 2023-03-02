@@ -8,8 +8,8 @@ import Products from '../components/Products'
 import { mobile } from '../responsive'
 
 const Container = styled.div`
-    padding-top: 60px;
-    ${mobile({ paddingTop: "50px" })}
+    scroll-padding-top: 60px;
+    ${mobile({ scrollPaddingTop: "50px" })}
 `;
 
 const Title = styled.h1`

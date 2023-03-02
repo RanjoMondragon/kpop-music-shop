@@ -31,11 +31,11 @@ const ArrowContainer = styled.div`
 
 const Container = styled.div`
     width: 100%;
-    height: calc(100dvh - 60px);
+    height: 100dvh;
     display: flex;
     position: relative;
     overflow: hidden;
-    padding-top: 60px;
+    scroll-padding-top: 60px;
     &:hover ${ArrowContainer}{
         opacity: 1;
     }

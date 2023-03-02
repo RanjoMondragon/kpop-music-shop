@@ -14,6 +14,7 @@ import { mobile } from "../responsive"
 const KEY = process.env.REACT_APP_STRIPE;
 
 const Container = styled.div`
+  scroll-padding-top: 60px;
   ${mobile({ padding: "50px 0px" })}
 `
 
