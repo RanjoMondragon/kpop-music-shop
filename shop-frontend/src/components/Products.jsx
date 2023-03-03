@@ -14,7 +14,7 @@ const Container = styled.div`
     })}
 `
 
-const Products = ({category, sort, isHomePage}) => {
+const Products = ({category, sort, isHomePage, searchQuery}) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -36,22 +36,37 @@ const Products = ({category, sort, isHomePage}) => {
   }, [category]);
 
   useEffect(() => {
-    if (sort === "newest") {
-      setFilteredProducts(products.slice().sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)));
-    } else if (sort === "asc") {
-      setFilteredProducts(products.slice().sort((a, b) => a.price - b.price));
-    } else if (sort === "desc") {
-      setFilteredProducts(products.slice().sort((a, b) => b.price - a.price));
+    let filtered = [...products];
+    if (searchQuery) {
+      filtered = filtered.filter(
+        (product) =>
+          product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          product.artist.toLowerCase().includes(searchQuery.toLowerCase())
+      );
     }
-  }, [sort, products]);
+    if (sort === "newest") {
+      filtered = filtered.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+    } else if (sort === "asc") {
+      filtered = filtered.sort((a, b) => a.price - b.price);
+    } else if (sort === "desc") {
+      filtered = filtered.sort((a, b) => b.price - a.price);
+    }
+    setFilteredProducts(filtered);
+    console.log(filtered)
+  }, [sort, searchQuery, products]);
+  
+  const productsToRender = searchQuery ? filteredProducts : products;
+
 
   return (
     <Container>
-      {category ? filteredProducts.map((item) => (
-        <Product item={item} key={item._id} />
-      )) : products.slice(0, isHomePage ? 8 : 16).map((item) => (
-      <Product item={item} key={item._id} />
-      ))}    
+      {category
+        ? productsToRender.map((item) => (
+            <Product item={item} key={item._id} />
+          ))
+        : productsToRender.slice(0, isHomePage ? 8 : 16).map((item) => (
+            <Product item={item} key={item._id} />
+          ))}
     </Container>
   );
 }

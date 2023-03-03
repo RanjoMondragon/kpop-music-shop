@@ -1,4 +1,4 @@
-import {AccountCircle, Search, ShoppingCartOutlined } from '@mui/icons-material';
+import {AccountCircle, ShoppingCartOutlined } from '@mui/icons-material';
 import { Badge } from '@mui/material';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,32 +40,15 @@ const Wrapper = styled.div`
 const Left = styled.div`
     flex: 1;
     display: flex;
-    align-items: center;   
-`;
-
-const SearchContainer = styled.div`
-    border: 0.5px solid lightgray;
-    display: flex;
     align-items: center;
-    margin-left: 25px;
-    padding: 5px;
     ${mobile({ 
-        textAlign: "center",
-        border: "none",
-    })}
-`;
-
-const Input = styled.input`
-    border: none;
-
-    ${mobile({ 
-        width: "80vw",        
-    })}
+        display: "none", 
+    })}   
 `;
 
 const Logo = styled.h1`
     font-weight: bold;
-    ${mobile({ display: "none" })}
+    ${mobile({ fontSize: "24px" })}
     ${tablet({ fontSize: "3dvw" })}
 `;
 
@@ -78,15 +61,15 @@ const Right = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    ${mobile({ display: "none" })}
-    /* ${tablet({ display: "none" })} */
+    ${mobile({ 
+        display: "none", 
+    })}
 `;
 
 const MenuItem = styled.div`
-    font-size: 14px;
+    font-size: 18px;
     cursor: pointer;
     margin-left: 25px;
-    ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
 const Navbar = () => {
@@ -105,10 +88,9 @@ const Navbar = () => {
             <GlobalStyle/>
             <Wrapper>
                 <Left>
-                    <SearchContainer>
-                        <Input placeholder={"Search..."}/>
-                        <Search style={{color:"gray", fontSize:16}}/>
-                    </SearchContainer>
+                    <Link to="/search" style={{ color: "black", textDecoration: "none" }}>
+                        <MenuItem>SEARCH</MenuItem>
+                    </Link>
                 </Left>
                 <Center>
                     <Link to="/" style={{color:"black", textDecoration: "none"}}>

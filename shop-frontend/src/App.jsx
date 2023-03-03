@@ -10,6 +10,7 @@ import Success from "./pages/Success";
 import { useSelector } from "react-redux";
 import AllProducts from "./pages/AllProducts";
 import Profile from "./pages/Profile";
+import Search from "./pages/Search";
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser);
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/products/:category" element={<ProductList/>} />
         <Route path="/product/:id" element={<Product/>} />
         <Route path="/success" element={<Success/>} />
+        <Route path="/search" element={<Search/>} />
         <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
         { user && <Route path="/profile/:userId" element={<Profile userId={user._id}/>} />}
