@@ -52,7 +52,6 @@ const Products = ({category, sort, isHomePage, searchQuery}) => {
       filtered = filtered.sort((a, b) => b.price - a.price);
     }
     setFilteredProducts(filtered);
-    console.log(filtered)
   }, [sort, searchQuery, products]);
   
   const productsToRender = searchQuery ? filteredProducts : products;

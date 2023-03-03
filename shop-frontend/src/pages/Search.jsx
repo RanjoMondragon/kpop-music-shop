@@ -40,7 +40,6 @@ function Search() {
 
     const handleSearch = (event) => {
       setSearchQuery(event.target.value);
-      console.log("handlesearch:", searchQuery);
     };
     return (
         <Container>

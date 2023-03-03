@@ -61,7 +61,6 @@ const ProductList = () => {
     const category = decodeURI(location.pathname.split("/")[2])
     .replace(/SeasonsGreetings/g, "Season's Greetings");
     const [sort, setSort] = useState("newest");
-    console.log(category)
 
     return (
         <Container>
