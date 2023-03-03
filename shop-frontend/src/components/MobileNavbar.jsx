@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { Home, Menu, Person, ShoppingCartOutlined } from '@mui/icons-material';
+import { Home, Person, Search, ShoppingCartOutlined } from '@mui/icons-material';
 import styled from 'styled-components';
 import { mobile } from '../responsive';
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Container = styled.div`
   display: none;
@@ -38,38 +38,10 @@ const MobileNavbarItem = styled.div`
   })}
 `;
 
-const PopUpContainer = styled.div`
-  position: fixed;
-  bottom: 50px;
-  width: 100vw;
-  height: 100px;
-  background-color: white;
-  border: 1px solid black;
-  z-index: 5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: slideUp 0.3s ease-in-out forwards;
-
-  @keyframes slideUp {
-    0% {
-      transform: translateY(100%);
-    }
-    100% {
-      transform: translateY(0%);
-    }
-  }
-`;
-
-
 const MobileNavbar = () => {
-    const [showPopup, setShowPopup] = useState(false);
     const location = useLocation();
-    const activeTab = location.pathname;    
-
-    const handlePersonIconClick = () => {
-        setShowPopup(!showPopup);
-    };
+    const activeTab = location.pathname;
+    const user = useSelector((state) => state.user.currentUser);    
 
     return (
         <Container>
@@ -80,11 +52,11 @@ const MobileNavbar = () => {
                     <Home/>
                 </MobileNavbarItem>
             </Link>
-            <Link to="/login" style={{color:"black"}}>
+            <Link to="/search" style={{color:"black"}}>
                 <MobileNavbarItem
-                    active={activeTab === '/login'}
+                    active={activeTab === '/search'}
                 >
-                    <Person/>
+                    <Search/>
                 </MobileNavbarItem>
             </Link>
             <Link to="/cart" style={{color:"black"}}>
@@ -94,13 +66,22 @@ const MobileNavbar = () => {
                     <ShoppingCartOutlined/>
                 </MobileNavbarItem>
             </Link>
-            <MobileNavbarItem onClick={handlePersonIconClick}>
-                <Menu/>
-            </MobileNavbarItem>
-            {showPopup && (
-            <PopUpContainer>
-                <div>Log in or Register</div>
-            </PopUpContainer>
+            {user ? (
+                <Link to="/profile/:userId" style={{color:"black"}}>
+                    <MobileNavbarItem
+                        active={activeTab === '/profile/:userId'}
+                    >
+                        <Person/>
+                    </MobileNavbarItem>
+                </Link>
+            ) : (
+                <Link to="/login" style={{color:"black"}}>
+                    <MobileNavbarItem
+                        active={activeTab === '/login'}
+                    >
+                        <Person/>
+                    </MobileNavbarItem>
+                </Link>
             )}
         </Container>
     )
