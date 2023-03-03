@@ -31,8 +31,14 @@ const Input = styled.input`
     height: 2rem;
     font-size: 1.25rem;
     font-weight: 400;
-    padding: 5px;
+    padding: 5px 10px;
     border: 3px solid var(--primary-color);
+    border-radius: 20px;
+    &:focus {
+        outline: none;
+        border-color: var(--secondary-color);
+        box-shadow: 0 0 0 2px var(--secondary-color);
+    }
 `;
 
 function Search() {
