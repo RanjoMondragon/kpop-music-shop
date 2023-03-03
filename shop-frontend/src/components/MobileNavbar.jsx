@@ -67,7 +67,7 @@ const MobileNavbar = () => {
                 </MobileNavbarItem>
             </Link>
             {user ? (
-                <Link to="/profile/:userId" style={{color:"black"}}>
+                <Link to={`/profile/${user._id}`} style={{color:"black"}}>
                     <MobileNavbarItem
                         active={activeTab === '/profile/:userId'}
                     >

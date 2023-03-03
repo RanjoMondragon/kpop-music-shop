@@ -10,7 +10,7 @@ import axios from "axios";
 import { useSelector } from 'react-redux'
 
 const Container = styled.div`
-    height: 90dvh;
+    height: 95dvh;
     padding: 20px;
     padding-top: 60px;
     padding-bottom: -60px;
@@ -101,7 +101,6 @@ function Profile() {
     const [errorOpen, setErrorOpen] = useState(false);
     const { userId } = useParams();
     const userToken = localStorage.getItem('userToken');
-    console.log('User token:', userToken);
     const [isFormDirty, setIsFormDirty] = useState(false);
     const [isEmailDirty, setIsEmailDirty] = useState(false);
     const [isUsernameDirty, setIsUsernameDirty] = useState(false);
