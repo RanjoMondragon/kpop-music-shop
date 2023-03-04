@@ -1,6 +1,9 @@
-import { FavoriteBorderOutlined, SearchOutlined } from "@mui/icons-material"
+import { Favorite, FavoriteBorderOutlined, SearchOutlined } from "@mui/icons-material"
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { addProductToWishlist, removeProductFromWishlist } from "../redux/wishlistRedux";
 import { mobile } from "../responsive";
 
 const Info = styled.div`
@@ -86,6 +89,26 @@ const ProductTitleText = styled.p`
 `;
 
 const Product = ({item}) => {
+    const dispatch = useDispatch();
+    const [isFavorite, setIsFavorite] = useState(false);
+    const wishlist = useSelector((state) => state.wishlist && state.wishlist.products);
+
+    useEffect(() => {
+        if (wishlist) {
+        setIsFavorite(wishlist.some((product) => product._id === item._id));
+        }
+    }, [item._id, wishlist]);
+
+    const handleClick = () => {
+        if (isFavorite) {
+        dispatch(removeProductFromWishlist({ productId: item._id }));
+        setIsFavorite(false);
+        } else {
+        dispatch(addProductToWishlist(item));
+        setIsFavorite(true);
+        }
+    }; 
+      
     return (
         <Container>
             <ImageContainer>
@@ -100,10 +123,13 @@ const Product = ({item}) => {
                         </Link>
                     </Icon>
                     <Icon>
-                        <FavoriteBorderOutlined style={{color:"black"}}/>
+                    {isFavorite ? (
+            <Favorite onClick={handleClick} style={{ color: 'red' }} />
+          ) : (
+            <FavoriteBorderOutlined onClick={handleClick} style={{ color: 'black' }} />
+          )}
                     </Icon>
-                </Info>
-            
+                </Info>            
             <ProductTitleText>{item.title}</ProductTitleText>            
         </Container>
     )

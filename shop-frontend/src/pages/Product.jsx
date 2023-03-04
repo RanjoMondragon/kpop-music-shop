@@ -145,12 +145,7 @@ const Album = () => {
             setQuantity(quantity+1);
         }
     };
-
-    // const handleClick = () => {
-    //     dispatch(
-    //         addProduct({ ...product, quantity, versions})
-    //     );
-    // };
+    
     const handleClick = () => {
         dispatch(
           addProduct({

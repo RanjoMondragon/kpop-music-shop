@@ -197,7 +197,6 @@ const Cart = () => {
     stripeToken && cart.total >=1 && makeRequest();
   }, [stripeToken, cart.total, navigate]);
   
-  console.log(stripeToken)
   return (
     <Container>
         <Navbar/>
@@ -208,7 +207,9 @@ const Cart = () => {
               <TopButton>Return to Shop</TopButton>
               </Link>
               <TopTexts>
-                <TopText>Wishlist</TopText>
+                <Link to="/wishlist" style={{ color: "black", textDecoration: "none" }}>
+                  <TopText>Wishlist</TopText>
+                </Link>
               </TopTexts>
           </Top>
           <Bottom>
@@ -238,7 +239,6 @@ const Cart = () => {
                 </PriceDetail>
               </Product>
               ))}
-              {console.log(cart.products)}
               <Hr/>
             </Info>
             <Summary>
