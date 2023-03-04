@@ -88,9 +88,11 @@ const Navbar = () => {
             <GlobalStyle/>
             <Wrapper>
                 <Left>
+                    {user &&
                     <Link to="/wishlist" style={{ color: "black", textDecoration: "none" }}>
                         <MenuItem>WISHLIST</MenuItem>
                     </Link>
+                    }
                     <Link to="/search" style={{ color: "black", textDecoration: "none" }}>
                         <MenuItem>SEARCH</MenuItem>
                     </Link>
