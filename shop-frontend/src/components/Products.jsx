@@ -1,6 +1,6 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
+import { publicRequest } from "../requestMethods"
 import { mobile } from "../responsive"
 import Product from "./Product"
 
@@ -18,22 +18,25 @@ const Products = ({category, sort, isHomePage, searchQuery}) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
+
+
   useEffect(() => {
     const getProducts = async () => {
       try {
-        let url = "https://kpop-music-shop.herokuapp.com/api/products";
+        let url = "/products";
         if (category) {
           url += `?category=${category}`;
         }
-        const res = await axios.get(url);
+        const res = await publicRequest.get(url);
         setProducts(res.data);
       } catch (err) {
         console.log(err);
       }
     };
-    
+  
     getProducts();
   }, [category]);
+  
 
   useEffect(() => {
     let filtered = [...products];
