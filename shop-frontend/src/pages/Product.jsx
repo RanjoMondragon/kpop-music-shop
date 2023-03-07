@@ -7,7 +7,7 @@ import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import Newsletter from "../components/Newsletter"
 import { addProduct } from "../redux/cartRedux"
-import { addProductToWishlist } from "../redux/wishlistRedux"
+import { addProductToWishlist, removeProductFromWishlist } from "../redux/wishlistRedux"
 import { publicRequest } from "../requestMethods"
 import { mobile } from "../responsive"
 
@@ -166,16 +166,21 @@ const Album = () => {
     };
 
     useEffect(() => {
-        if (wishlist) {
-            setIsInWishlist(wishlist.some((item) => item._id === product._id));
+        if (product._id && wishlist) {
+          setIsInWishlist(wishlist.some((item) => item._id === product._id));
         }
-    }, [product._id, wishlist]);
+      }, [product._id, wishlist]);
+      
       
 
     const handleWishlistClick = () => {
-        dispatch(addProductToWishlist(product));
-        setIsInWishlist(true);
-    }
+        if (isInWishlist) {
+          dispatch(removeProductFromWishlist({productId: product._id}));
+        } else {
+          dispatch(addProductToWishlist(product));
+        }
+        setIsInWishlist(!isInWishlist);
+      };
          
     return (
         <Container>
@@ -211,7 +216,7 @@ const Album = () => {
                         <Button onClick={handleClick}>ADD TO CART</Button>
                     </CartContainer>
                     <WishlistLink onClick={handleWishlistClick}>
-                        {isInWishlist ? 'Added to wishlist' : 'Add to wishlist'}
+                        {isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
                     </WishlistLink>
                 </InfoContainer>
             </Wrapper>
