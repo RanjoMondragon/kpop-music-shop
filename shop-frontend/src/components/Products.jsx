@@ -21,7 +21,7 @@ const Products = ({category, sort, isHomePage, searchQuery}) => {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        let url = "http://localhost:5000/api/products";
+        let url = "https://kpop-music-shop.herokuapp.com/api/products";
         if (category) {
           url += `?category=${category}`;
         }
