@@ -1,12 +1,13 @@
 import { Add, Remove } from "@mui/icons-material"
 import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useLocation } from "react-router"
 import styled from "styled-components"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import Newsletter from "../components/Newsletter"
 import { addProduct } from "../redux/cartRedux"
+import { addProductToWishlist } from "../redux/wishlistRedux"
 import { publicRequest } from "../requestMethods"
 import { mobile } from "../responsive"
 
@@ -111,6 +112,12 @@ const Button = styled.button`
     }
 `;
 
+const WishlistLink = styled.div`
+    margin-top: 20px;
+    text-decoration: underline;
+    cursor: pointer;
+`
+
 const Album = () => {
     const location = useLocation();
     const id = decodeURI(location.pathname.split("/")[2]);
@@ -118,6 +125,8 @@ const Album = () => {
     const [quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
     const [versions, setVersions] = useState("default");
+    const wishlist = useSelector((state) => state.wishlist && state.wishlist.products);
+    const [isInWishlist, setIsInWishlist] = useState(false);
 
     useEffect(() => {
     if (product.versions && product.versions.length > 0) {
@@ -155,6 +164,18 @@ const Album = () => {
           })
         );
     };
+
+    useEffect(() => {
+        if (wishlist) {
+            setIsInWishlist(wishlist.some((item) => item._id === product._id));
+        }
+    }, [product._id, wishlist]);
+      
+
+    const handleWishlistClick = () => {
+        dispatch(addProductToWishlist(product));
+        setIsInWishlist(true);
+    }
          
     return (
         <Container>
@@ -189,6 +210,9 @@ const Album = () => {
                         </AmountContainer>
                         <Button onClick={handleClick}>ADD TO CART</Button>
                     </CartContainer>
+                    <WishlistLink onClick={handleWishlistClick}>
+                        {isInWishlist ? 'Added to wishlist' : 'Add to wishlist'}
+                    </WishlistLink>
                 </InfoContainer>
             </Wrapper>
             <Newsletter/>
